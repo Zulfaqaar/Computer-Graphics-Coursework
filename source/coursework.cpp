@@ -122,7 +122,7 @@ int main( void )
         glm::vec3(1.0f, 1.0f, 1.0f),         // colour
         1.0f, 0.1f, 0.02f);                  // attenuation
 
-    lightSources.addSpotLight(glm::vec3(0.0f, 2.0f, -5.0f),          // position
+    lightSources.addSpotLight(glm::vec3(0.0f, 3.0f, -5.0f),          // position
         glm::vec3(0.0f, -1.0f, 0.0f),         // direction
         glm::vec3(0.0f, 0.0f, 1.0f),          // colour
         1.0f, 0.1f, 0.02f,                    // attenuation
@@ -144,13 +144,14 @@ int main( void )
         glm::vec3(-8.75f,  -0.25f,  5.25f),
         glm::vec3(-8.75f,  -0.25f,  7.0f),
         glm::vec3(-8.75f,  -0.25f,  8.75f),
+        glm::vec3(0.0f,  1.28f,  -5.0f),
     };
 
     // Add teapots to objects vector
     std::vector<Object> objects;
     Object object;
     object.name = "teapot";
-    for (unsigned int i = 0; i < 11; i++)
+    for (unsigned int i = 0; i < 12; i++)
     {
         object.position = teapotPositions[i];
         object.rotation = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -171,11 +172,22 @@ int main( void )
 
     //Box positions
     glm::vec3 cratePositions[] = {
-        glm::vec3(0.0f, 0.0f, 0.0f),
+        glm::vec3(9.0f, -0.1f,   -8.75f),
+        glm::vec3(9.0f, -0.1f,   -7.0f),
+        glm::vec3(9.0f, -0.1f,   -5.25f),
+        glm::vec3(9.0f, -0.1f,   -3.5f),
+        glm::vec3(9.0f,  -0.1f,  -1.75f),
+        glm::vec3(9.0f,  -0.1f,  0.0f),
+        glm::vec3(9.0f,  -0.1f,  1.75f),
+        glm::vec3(9.0f,  -0.1f,  3.5f),
+        glm::vec3(9.0f,  -0.1f,  5.25f),
+        glm::vec3(9.0f,  -0.1f,  7.0f),
+        glm::vec3(9.0f,  -0.1f,  8.75f),
+        glm::vec3(0.0f,  -0.1f,  -5.0f),
     };
 
     object.name = "crate";
-    for (unsigned int i = 0; i < 1; i++)
+    for (unsigned int i = 0; i < 12; i++)
     {
         object.position = cratePositions[i];
         object.rotation = glm::vec3(1.0f, 1.0f, 1.0f);
