@@ -159,6 +159,31 @@ int main( void )
         objects.push_back(object);
     }
 
+    //Load box models
+    Model crate("../assets/cube.obj");
+    crate.addTexture("../assets/crate.jpg", "diffuse");
+
+    // Define crate object lighting properties
+    crate.ka = 1.0f;
+    crate.kd = 0.0f;
+    crate.ks = 0.0f;
+    crate.Ns = 20.0f;
+
+    //Box positions
+    glm::vec3 cratePositions[] = {
+        glm::vec3(0.0f, 0.0f, 0.0f),
+    };
+
+    object.name = "crate";
+    for (unsigned int i = 0; i < 1; i++)
+    {
+        object.position = cratePositions[i];
+        object.rotation = glm::vec3(1.0f, 1.0f, 1.0f);
+        object.scale = glm::vec3(0.75f, 0.75f, 0.75f);
+        object.angle = Maths::radians(0.0f);
+        objects.push_back(object);
+    }
+
     //WALLS
 
       //Wall positions
@@ -301,6 +326,8 @@ int main( void )
                 lrWalls.draw(shaderID);
             if (objects[i].name == "lrBricks")
                 lrWalls.draw(shaderID);
+            if (objects[i].name == "crate")
+                crate.draw(shaderID);
         }
 
         // Draw light sources
