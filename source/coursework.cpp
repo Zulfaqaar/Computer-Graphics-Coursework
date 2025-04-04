@@ -105,6 +105,7 @@ int main( void )
     // Load the textures
     teapot.addTexture("../assets/blue.bmp", "diffuse");
     teapot.addTexture("../assets/diamond_normal.png", "normal");
+    teapot.addTexture("../assets/neutral_specular.png", "specular");
 
     // Define teapot object lighting properties
     teapot.ka = 0.2f;
@@ -124,7 +125,7 @@ int main( void )
 
     lightSources.addSpotLight(glm::vec3(0.0f, 3.0f, -5.0f),          // position
         glm::vec3(0.0f, -1.0f, 0.0f),         // direction
-        glm::vec3(0.0f, 0.0f, 1.0f),          // colour
+        glm::vec3(0.0f, 0.5f, 0.5f),          // colour
         1.0f, 0.1f, 0.02f,                    // attenuation
         std::cos(Maths::radians(45.0f)));     // cos(phi)
 
@@ -211,10 +212,9 @@ int main( void )
     };
     // Load a 2D plane model for the brick walls and add textures
     Model fbWalls("../assets/plane.obj");
-    object.name = "fbBricks";
-    fbWalls.addTexture("../assets/bricks_diffuse - Copy.png", "diffuse");
-    fbWalls.addTexture("../assets/bricks_normal - Copy.png", "normal");
-    fbWalls.addTexture("../assets/bricks_specular - Copy.png", "specular");
+    fbWalls.addTexture("../assets/bricks_diffuse.png", "diffuse");
+    fbWalls.addTexture("../assets/bricks_normal.png", "normal");
+    fbWalls.addTexture("../assets/bricks_specular.png", "specular");
     // Define brick light properties
     fbWalls.ka = 0.2f;
     fbWalls.kd = 1.0f;
@@ -228,6 +228,7 @@ int main( void )
     object.scale = glm::vec3(5.0f, 5.0f, 5.0f);
     object.rotation = glm::vec3(1.0f, 0.0f, 0.0f);
     object.angle = Maths::radians(90.0f);
+    object.name = "fbBricks";
     objects.push_back(object);
 
     //BACK WALL
@@ -239,10 +240,9 @@ int main( void )
 
     // Load a 2D plane model for the brick walls and add textures
     Model lrWalls("../assets/plane.obj");
-    object.name = "lrBricks";
-    lrWalls.addTexture("../assets/bricks_diffuse - Copy.png", "diffuse");
-    lrWalls.addTexture("../assets/bricks_normal - Copy.png", "normal");
-    lrWalls.addTexture("../assets/bricks_specular - Copy.png", "specular");
+    lrWalls.addTexture("../assets/otherbricks_diffuse.png", "diffuse");
+    lrWalls.addTexture("../assets/otherbricks_normal.png", "normal");
+    lrWalls.addTexture("../assets/otherbricks_specular.png", "specular");
 
     // Define brick light properties
     lrWalls.ka = 0.2f;
@@ -257,6 +257,7 @@ int main( void )
     object.scale = glm::vec3(5.0f, 5.0f, 5.0f);
     object.rotation = glm::vec3(0.0f, 0.0f, 1.0f);
     object.angle = Maths::radians(90.0f);
+    object.name = "lrBricks";
     objects.push_back(object);
 
     //LEFT WALL
@@ -272,7 +273,7 @@ int main( void )
     Model floor("../assets/plane.obj");
     floor.addTexture("../assets/stones_diffuse.png", "diffuse");
     floor.addTexture("../assets/stones_normal.png", "normal");
-    teapot.addTexture("../assets/neutral_specular.png", "specular");
+
 
     // Define floor light properties
     floor.ka = 0.2f;
@@ -284,8 +285,15 @@ int main( void )
     object.position = glm::vec3(0.0f, -0.85f, 0.0f);
     object.scale = glm::vec3(1.0f, 1.0f, 1.0f);
     object.rotation = glm::vec3(0.0f, 1.0f, 0.0f);
-    object.angle = 0.0f;
+    object.angle = Maths::radians(90.0f);
     object.name = "floor";
+    objects.push_back(object);
+
+    // Add floor model to objects vector
+    object.position = glm::vec3(0.0f, 10.85f, 0.0f);
+    object.scale = glm::vec3(1.0f, 1.0f, 1.0f);
+    object.rotation = glm::vec3(0.0f, 0.0f, 1.0f);
+    object.angle = Maths::radians(180.0f);
     objects.push_back(object);
 
     // Render loop
@@ -335,7 +343,7 @@ int main( void )
             if (objects[i].name == "floor")
                 floor.draw(shaderID);
             if (objects[i].name == "fbBricks")
-                lrWalls.draw(shaderID);
+                fbWalls.draw(shaderID);
             if (objects[i].name == "lrBricks")
                 lrWalls.draw(shaderID);
             if (objects[i].name == "crate")
